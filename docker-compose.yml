@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  xteve:
+    container_name: xteve
+    image: alturismo/xteve
+    ports:
+      - 34400:34400
+    volumes:
+      - /mnt/user/appdata/xteve/:/root/.xteve:rw
+      - /mnt/user/appdata/xteve/_config:/config:rw
+      - /tmp/xteve/:/tmp/xteve:rw
+      - /mnt/user/appdata/tvheadend/data/:/TVH
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - nginx_proxy_manager
+networks:
+  nginx_proxy_manager:
+    external: true
+
+# =======================================
+# WEB UI: http://hostip:34400/web/
+# =======================================
